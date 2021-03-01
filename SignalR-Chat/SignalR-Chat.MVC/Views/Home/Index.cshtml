@@ -2,19 +2,35 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 }
 
-<div class="container">
+<div id="loginForm" class="container">
     <div class="row">&nbsp;</div>
     <div class="row">
-        <div class="col-2">User</div>
-        <div class="col-4"><input type="text" id="userInput" /></div>
+        <div class="col-2">UserId</div>
+        <div class="col-4">
+            <input type="text" id="userId" />
+        </div>
     </div>
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-6">
+            <input type="button" id="loginButton" value="Login" />
+        </div>
+    </div>
+</div>
+
+<div id="messageForm" class="container" style="display: none;">
+    <div class="row">&nbsp;</div>
     <div class="row">
         <div class="col-2">UserId</div>
-        <div class="col-4"><input type="number" id="userId" /></div>
+        <div class="col-4">
+            <input type="text" id="userDestinationId" />
+        </div>
     </div>
     <div class="row">
         <div class="col-2">Message</div>
-        <div class="col-4"><input type="text" id="messageInput" /></div>
+        <div class="col-4">
+            <textarea id="messageInput"></textarea>
+        </div>
     </div>
     <div class="row">&nbsp;</div>
     <div class="row">
@@ -23,19 +39,25 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-12">
         <hr />
     </div>
 </div>
+
 <div class="row">
-    <div class="col-6">
+    <div class="col-12">
+        <ul id="typingList"></ul>
+    </div>
+    <div class="col-12">
         <ul id="messagesList"></ul>
     </div>
 </div>
 
 @section Scripts {
+    <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/libs/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/chat.js"></script>
 }

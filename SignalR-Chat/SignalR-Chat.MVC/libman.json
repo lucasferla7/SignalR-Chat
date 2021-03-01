@@ -4,7 +4,7 @@
   "libraries": [
     {
       "library": "@microsoft/signalr@latest",
-      "destination": "wwwroot/libs/signalr/",
+      "destination": "wwwroot/lib/signalr/",
       "files": [
         "dist/browser/signalr.min.js",
         "dist/browser/signalr.js"
@@ -18,6 +18,15 @@
         "dist/css/bootstrap.min.css.map",
         "dist/js/bootstrap.min.js",
         "dist/js/bootstrap.min.js.map"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "jquery.min.js",
+        "jquery.min.map"
       ]
     }
   ]

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>SignalR_Chat.Models</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SignalR-Chat.Crosscutting\SignalR-Chat.Crosscutting.csproj" />
+  </ItemGroup>
+
+</Project>
