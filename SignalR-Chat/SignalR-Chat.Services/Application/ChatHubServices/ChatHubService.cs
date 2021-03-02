@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SignalR_Chat.Models;
 using SignalR_Chat.Services.Application.ChatHubServices.Commands;
 using SignalR_Chat.Services.Hubs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace SignalR_Chat.Services.Application.ChatHubServices
 
         public Dictionary<string, int> _connectedUsers { get; private set; } = new Dictionary<string, int>();
 
-        public string GetConnectionIdByUserId(int userId) => _connectedUsers.First(p => p.Value == userId).Key;
+        public string GetConnectionIdByUserId(int userId) => _connectedUsers.FirstOrDefault(p => p.Value == userId).Key;
 
         public User GetUserById(int userId)
         {
@@ -42,10 +43,15 @@ namespace SignalR_Chat.Services.Application.ChatHubServices
 
         public async Task SendMessage(int userDestinationId, int userSenderId, string message)
         {
-            string connectionId = GetConnectionIdByUserId(userDestinationId);
+            string userSenderconnectionId = GetConnectionIdByUserId(userSenderId);
+            string userDestinationconnectionId = GetConnectionIdByUserId(userDestinationId);
             User userSender = GetUserById(userSenderId);
             SaveMessage(userDestinationId, userSenderId, message);
-            await _hubClientContext.Clients.Client(connectionId).SendAsync("ReceiveMessage", userSender.Name, message);
+
+            await _hubClientContext.Clients.Client(userSenderconnectionId).SendAsync("ReceiveMessage", userSender.Name, message, DateTime.Now);
+
+            if (!string.IsNullOrEmpty(userDestinationconnectionId))
+                await _hubClientContext.Clients.Client(userDestinationconnectionId).SendAsync("ReceiveMessage", userSender.Name, message, DateTime.Now);
         }
 
         public async Task InitTyping(int userSenderId)
@@ -65,5 +71,8 @@ namespace SignalR_Chat.Services.Application.ChatHubServices
 
         private IReadOnlyList<string> GetClientsConnectionIdExcpetId(int id) =>
             _connectedUsers.Where(p => p.Value != id).Select(p => p.Key).ToList().AsReadOnly();
+
+        private IReadOnlyList<string> GetClientsConnectionIdByConenctionIds(int[] ids) =>
+            _connectedUsers.Where(p => ids.Contains(p.Value)).Select(p => p.Key).ToList().AsReadOnly();
     }
 }

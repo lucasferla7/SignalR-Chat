@@ -11,8 +11,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SignalR_Chat.Data.Context;
 using SignalR_Chat.Services.Application.ChatHubServices;
-using SignalR_Chat.Services.Application.HomeServices;
-using SignalR_Chat.Services.Application.Token;
+using SignalR_Chat.Services.Application.MessageServices;
+using SignalR_Chat.Services.Application.TokenServices;
+using SignalR_Chat.Services.Application.UserServices;
 using SignalR_Chat.Services.Hubs;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,14 +29,11 @@ namespace SignalR_Chat.MVC
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddJsonOptions(options =>
-            {
-                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-                options.JsonSerializerOptions.PropertyNamingPolicy = null;
-            });
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             services.AddSwaggerGen(c =>
             {
@@ -85,12 +83,15 @@ namespace SignalR_Chat.MVC
             services.AddSignalR();
 
             services.AddDbContext<ChatContext>();
+
             services.AddSingleton<IChatHubService, ChatHubService>();
-            services.AddTransient<IHomeService, HomeService>();
-            services.AddTransient<ITokenService, TokenService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IMessageService, MessageService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobClient)
         {
             if (env.IsDevelopment())

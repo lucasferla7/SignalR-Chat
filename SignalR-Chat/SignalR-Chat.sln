@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR-Chat.MVC", "SignalR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR-Chat.Services", "SignalR-Chat.Services\SignalR-Chat.Services.csproj", "{8A61AFF7-975C-47A1-ACF9-B26A9E7DBB00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR-Chat.Data", "SignalR-Chat.data\SignalR-Chat.Data.csproj", "{2AACD186-F67C-4D2D-A627-FCCB12CBA871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR-Chat.Data", "SignalR-Chat.Data\SignalR-Chat.Data.csproj", "{2AACD186-F67C-4D2D-A627-FCCB12CBA871}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR-Chat.Models", "SignalR-Chat.Models\SignalR-Chat.Models.csproj", "{069B64DC-CE3D-448D-99FE-660B1C15DC51}"
 EndProject
