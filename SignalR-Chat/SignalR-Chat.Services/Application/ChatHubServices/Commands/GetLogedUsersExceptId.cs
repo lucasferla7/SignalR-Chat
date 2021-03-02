@@ -8,10 +8,8 @@ namespace SignalR_Chat.Services.Application.ChatHubServices.Commands
     {
         private readonly IServiceScopeFactory _scopeFactory;
 
-        public GetLogedUsersExceptId(IServiceScopeFactory scopeFactory)
-        {
+        public GetLogedUsersExceptId(IServiceScopeFactory scopeFactory) =>
             _scopeFactory = scopeFactory;
-        }
 
         public User Execute(int id)
         {

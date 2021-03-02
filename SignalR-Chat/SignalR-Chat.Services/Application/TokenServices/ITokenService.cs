@@ -1,4 +1,4 @@
-﻿namespace SignalR_Chat.Services.Application.Token
+﻿namespace SignalR_Chat.Services.Application.TokenServices
 {
     public interface ITokenService
     {

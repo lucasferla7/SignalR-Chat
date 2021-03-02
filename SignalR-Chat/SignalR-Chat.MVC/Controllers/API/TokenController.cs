@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using SignalR_Chat.Data.Context;
 using SignalR_Chat.Models;
-using SignalR_Chat.Services.Application.Token;
+using SignalR_Chat.Services.Application.TokenServices;
 using System.Linq;
 
 namespace SignalR_Chat.MVC.Controllers.API
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class TokenController : ControllerBase
     {
         private readonly ChatContext _context;

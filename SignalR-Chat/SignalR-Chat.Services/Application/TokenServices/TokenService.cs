@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace SignalR_Chat.Services.Application.Token
+namespace SignalR_Chat.Services.Application.TokenServices
 {
     public class TokenService : ITokenService
     {

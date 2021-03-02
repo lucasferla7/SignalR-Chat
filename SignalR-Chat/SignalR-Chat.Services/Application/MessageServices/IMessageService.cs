@@ -1,7 +1,11 @@
-﻿namespace SignalR_Chat.Services.Application.MessageServices
+﻿using SignalR_Chat.Models;
+using SignalR_Chat.Services.Application.BaseService;
+using System.Collections.Generic;
+
+namespace SignalR_Chat.Services.Application.MessageServices
 {
-    public interface IMessageService
+    public interface IMessageService : IBaseService<Message>
     {
-        public void SaveMessage(int userDestinationId, int userSenderId, string message);
+        IEnumerable<Message> GetAllMessagesByUserIds(int userSenderId, int userReceiverId);
     }
 }
